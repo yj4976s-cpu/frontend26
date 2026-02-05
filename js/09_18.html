@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang = "ko">
+<head>
+  <meta charset = "utf-8">
+ <style>
+ .container { padding: 20px; background: lightblue; }
+ .box { padding: 15px; background: lightgreen; margin: 10px; }
+ .button { padding: 10px; background: lightcoral; }
+ </style>
+</head>
+<body>
+ <div class="container" id="container">
+ 컨테이너
+ <div class="box" id="box">
+ 박스
+ <button class="button" id="button">버튼</button>
+ </div>
+ </div>
+
+ <div id="log"></div>
+<ul id="todoList">
+ <li data-id="1">할 일 1 <button class="delete">삭제</button></li>
+ <li data-id="2">할 일 2 <button class="delete">삭제</button></li>
+ <li data-id="3">할 일 3 <button class="delete">삭제</button></li>
+</ul>
+<button id="addTodo">할 일 추가</button>/
+ 1. 조건부 이벤트 처리
+document.addEventListener('click', (event) => {
+ // 특정 클래스를 가진 요소만 처리
+ if (event.target.matches('.clickable')) {
+ console.log('클릭 가능한 요소가 클릭됨');
+ }
+
+ // 버튼 타입별 처리
+ if (event.target.matches('[data-action]')) {
+ const action = event.target.dataset.action;
+ handleAction(action, event.target);
+ }
+});
+ <script>
+ const container = document.getElementById('container');
+ const box = document.getElementById('box');
+ const button = document.getElementById('button');
+ const log = document.getElementById('log');
+
+ function addLog(message) {
+ log.innerHTML += message + '<br>';
+ }
+
+ // 버블링 단계에서 이벤트 처리
+ container.addEventListener('click', () => addLog('컨테이너 클릭됨'));
+ box.addEventListener('click', () => addLog('박스 클릭됨'));
+ button.addEventListener('click', () => addLog('버튼 클릭됨'));
+button.addEventListener('click', (event) => {
+ addLog('버튼 클릭됨 (전파 중단)');
+ event.stopPropagation(); // 이벤트 전파 중단
+});
+
+// 또는 즉시 전파 중단
+button.addEventListener('click', (event) => {
+ addLog('버튼 클릭됨 (즉시 중단)');
+ event.stopImmediatePropagation(); // 같은 요소의 다른 리스너도 중단
+});
+const todoList = document.getElementById('todoList');
+const addTodo = document.getElementById('addTodo');
+let todoCount = 3;
+
+// 이벤트 위임: 부모 요소에서 모든 삭제 버튼 이벤트 처리
+todoList.addEventListener('click', (event) => {
+ if (event.target.classList.contains('delete')) {
+ const li = event.target.parentElement;
+ const todoId = li.dataset.id;
+
+ if (confirm(`할 일 ${todoId}를 삭제하시겠습니까?`)) {
+ li.remove();
+ }
+ }
+});
+
+// 새로운 할 일 추가 (이벤트 리스너 재등록 불필요!)
+addTodo.addEventListener('click', () => {
+ todoCount++;
+ const newTodo = document.createElement('li');
+ newTodo.dataset.id = todoCount;
+ newTodo.innerHTML = `할 일 ${todoCount} <button class="delete">삭제</button>`;
+ todoList.appendChild(newTodo);
+});
+
+
+function handleAction(action, element) {
+ switch(action) {
+ case 'delete':
+ deleteItem(element);
+ break;
+ case 'edit':
+ editItem(element);
+ break;
+ case 'save':
+ saveItem(element);
+ break;
+ }
+}
+
+// 2. 이벤트 쓰로틀링 (성능 최적화)
+function throttle(func, delay) {
+ let timeoutId;
+ let lastExecTime = 0;
+
+ return function (...args) {
+ const currentTime = Date.now();
+
+ if (currentTime - lastExecTime > delay) {
+ func.apply(this, args);
+ lastExecTime = currentTime;
+ }
+ };
+}
+
+// 스크롤 이벤트 최적화
+window.addEventListener('scroll', throttle(() => {
+ console.log('스크롤 이벤트 처리');
+}, 100));
+
+ </script>
+</body>
+</html>

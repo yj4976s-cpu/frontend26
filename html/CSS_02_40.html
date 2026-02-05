@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>모바일 퍼스트 카페 메뉴</title>
+ <style>
+ /* 모바일 기본 스타일 (320px 이상) */
+ * {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ }
+
+ body {
+ font-family: 'Arial', sans-serif;
+ line-height: 1.6;
+ color: #333;
+ }
+
+ .container {
+ max-width: 100%;
+ padding: 0 15px;
+ }
+
+ header {
+ background: #2c3e50;
+ color: white;
+ padding: 1rem 0;
+ text-align: center;
+ }
+
+ .menu-item {
+ background: white;
+ border: 1px solid #ddd;
+ margin: 10px 0;
+ padding: 15px;
+ border-radius: 5px;
+ }
+
+ .menu-item h3 {
+ color: #2c3e50;
+ margin-bottom: 5px;
+ }
+
+ .price {
+ font-weight: bold;
+ color: #e74c3c;
+ font-size: 1.2em;
+ }
+
+ .menu-image {
+ width: 100%;
+ height: 200px;
+ object-fit: cover;
+ border-radius: 5px;
+ margin-bottom: 10px;
+ }
+   /* 기존 모바일 스타일 유지 */
+
+/* 태블릿 화면 (768px 이상) */
+@media (min-width: 768px) {
+ .container {
+ max-width: 750px;
+ margin: 0 auto;
+ }
+
+ .menu-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 20px;
+ }
+
+ .menu-item {
+ margin: 0; /* 그리드에서는 margin 제거 */
+ }
+
+ header h1 {
+ font-size: 2.5em;
+ }
+}
+@media (min-width: 1024px) {
+ .container {
+ max-width: 1200px;
+ }
+
+ .menu-grid {
+ grid-template-columns: repeat(3, 1fr);
+ gap: 30px;
+ }
+
+ .menu-item {
+ transition: transform 0.3s ease;
+ }
+
+ .menu-item:hover {
+ transform: translateY(-5px);
+ box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+ }
+
+ header {
+ padding: 2rem 0;
+ }
+
+ header h1 {
+ font-size: 3em;
+ }
+
+ /* 데스크톱에서만 보이는 추가 정보 */
+ .extra-info {
+ display: block;
+ background: #ecf0f1;
+ padding: 10px;
+ margin-top: 10px;
+ border-radius: 3px;
+ font-size: 0.9em;
+ color: #7f8c8d;
+ }
+}
+
+/* 모바일과 태블릿에서는 숨김 */
+.extra-info {
+ display: none;
+}
+ </style>
+</head>
+<body>
+ <div class="container">
+ <header>
+ <h1> 개발자 카페</h1>
+ <p>코딩하며 마시는 커피</p>
+ </header>
+
+ <main>
+  <div class="menu-grid">
+ <div class="menu-item">
+ <img src="https://via.placeholder.com/300x200/8e44ad/ffffff?text=Americano" alt="아메리카노" class="menu-image">
+ <h3>아메리카노</h3>
+ <p>깔끔하고 진한 맛의 기본 커피</p>
+ <div class="price">3,500원</div>
+ </div>
+
+ <div class="menu-item">
+ <img src="https://via.placeholder.com/300x200/3498db/ffffff?text=Latte" alt="라떼" class="menu-image">
+ <h3>카페라떼</h3>
+ <p>부드러운 우유거품과 에스프레소의 조화</p>
+ <div class="price">4,500원</div>
+ </div>
+    <div class="menu-item">
+ <img src="https://via.placeholder.com/300x200/8e44ad/ffffff?text=Americano" alt="아메리카노" class="menu-image">
+ <h3>아메리카노</h3>
+ <p>깔끔하고 진한 맛의 기본 커피</p>
+ <div class="price">3,500원</div>
+ <div class="extra-info">
+ 카페인: 75mg | 추출시간: 25초 | 원두: 브라질 산토스
+ </div>
+</div>
+  </div>
+ </main>
+ </div>
+</body>
+</html>

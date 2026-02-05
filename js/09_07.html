@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang = "ko">
+<head>
+  <meta charset="utf-8">
+ <title>매개변수 실습</title>
+</head>
+<body>
+ <h1>나만의 계산기</h1>
+ <script>
+ // 덧셈 함수 만들기
+ function add(num1, num2) {
+ let result = num1 + num2;
+ console.log(num1 + " + " + num2 + " = " + result);
+ return result;
+ }
+
+ // 함수 호출해보기
+ add(5, 3); // 출력: 5 + 3 = 8
+ add(10, 20); // 출력: 10 + 20 = 30// 여러 연산을 하는 함수들
+function subtract(num1, num2) {
+ return num1 - num2;
+}
+
+function multiply(num1, num2) {
+ return num1 * num2;
+}
+
+function divide(num1, num2) {
+ if (num2 !== 0) {
+ return num1 / num2;
+ } else {
+ return "0으로 나눌 수 없습니다!";
+ }
+}
+
+// 테스트해보기
+console.log("빼기:", subtract(10, 4)); // 출력: 빼기: 6
+console.log("곱하기:", multiply(3, 7)); // 출력: 곱하기: 21
+console.log("나누기:", divide(15, 3)); // 출력: 나누기: 5
+console.log("나누기:", divide(10, 0)); // 출력: 나누기: 0으로 나눌 수 없습니다!
+// 사용자 프로필을 출력하는 함수
+function showProfile(name, age, hobby = "독서") {
+ console.log("=== 사용자 프로필 ===");
+ console.log("이름: " + name);
+ console.log("나이: " + age + "살");
+ console.log("취미: " + hobby);
+ console.log("==================");
+}
+
+// 다양한 방식으로 호출
+showProfile("김개발", 20); // 취미는 기본값 "독서"
+showProfile("박멘토", 30, "코딩");
+showProfile("이디자인", 25, "그림 그리기");
+
+ </script>
+</body>
+</html>

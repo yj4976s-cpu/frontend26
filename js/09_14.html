@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang ="ko">
+<head>
+  <meta charset = "utf-8">
+ <title>스타일 조작 연습</title>
+</head>
+<body>
+ <button id="colorButton">색상 변경 버튼</button>
+<button id="toggleButton">토글 버튼</button>
+ <div id="colorBox" style="width: 200px; height: 200px; border: 2px solid black; margin: 20px;">
+ 클릭해보세요!
+</div>
+<button id="randomButton">랜덤 색상 변경</button>
+ <script>
+ const button = document.getElementById('colorButton');
+
+ // 버튼 클릭 시 색상 변경
+ button.addEventListener('click', function() {
+ button.style.backgroundColor = 'skyblue';
+ button.style.color = 'white';
+ button.style.padding = '15px 30px';
+ button.style.border = 'none';
+ button.style.borderRadius = '10px';
+ });
+   const toggleButton = document.getElementById('toggleButton');
+ let isActive = false;
+
+ toggleButton.addEventListener('click', function() {
+ if (isActive) {
+ // 원래 상태로 복원
+ toggleButton.style.backgroundColor = '';
+ toggleButton.style.color = '';
+ toggleButton.style.transform = '';
+ } else {
+ // 활성화 상태로 변경
+ toggleButton.style.backgroundColor = 'purple';
+ toggleButton.style.color = 'white';
+ toggleButton.style.transform = 'scale(1.1)';
+ }
+ isActive = !isActive;
+ });
+   const colorBox = document.getElementById('colorBox');
+ const randomButton = document.getElementById('randomButton');
+
+ // 랜덤 색상 생성 함수
+ function getRandomColor() {
+ const letters = '0123456789ABCDEF';
+ let color = '#';
+ for (let i = 0; i < 6; i++) {
+ color += letters[Math.floor(Math.random() * 16)];
+ }
+ return color;
+ }
+
+ randomButton.addEventListener('click', function() {
+ const randomColor = getRandomColor();
+
+ colorBox.style.backgroundColor = randomColor;
+ colorBox.style.color = 'white';
+ colorBox.style.textAlign = 'center';
+ colorBox.style.lineHeight = '200px';
+ colorBox.style.fontSize = '18px';
+ colorBox.style.fontWeight = 'bold';
+ colorBox.textContent = randomColor;
+ });
+ </script>
+</body>
+</html>

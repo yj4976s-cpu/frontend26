@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>플렉시블 그리드 실습</title>
+ <style>
+ .container {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 20px;
+ }
+
+ .row {
+ display: flex;
+ flex-wrap: wrap;
+ margin: 0 -15px; /* 음수 마진으로 거터 상쇄 */
+ }
+
+ .col-4 {
+ width: 33.333%; /* 12컬럼 중 4컬럼 = 33.333% */
+ padding: 0 15px; /* 좌우 여백 (거터) */
+ box-sizing: border-box;
+ }
+
+ .card {
+ background: #f8f9fa;
+ padding: 20px;
+ border-radius: 8px;
+ margin-bottom: 20px;
+ box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+ }
+   /* 다양한 컬럼 크기 클래스 */
+.col-1 { width: 8.333%; } /* 1/12 */
+.col-2 { width: 16.666%; } /* 2/12 */
+.col-3 { width: 25%; } /* 3/12 */
+.col-4 { width: 33.333%; } /* 4/12 */
+.col-6 { width: 50%; } /* 6/12 */
+.col-8 { width: 66.666%; } /* 8/12 */
+.col-12 { width: 100%; } /* 12/12 */
+
+/* 공통 스타일 */
+[class*="col-"] {
+ padding: 0 15px;
+ box-sizing: border-box;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+ .col-4 {
+ width: 50%; /* 태블릿에서는 2개씩 */
+ }
+}
+
+@media (max-width: 480px) {
+ .col-4 {
+ width: 100%; /* 모바일에서는 1개씩 */
+ }
+}
+ </style>
+</head>
+<body>
+ <div class="container">
+ <div class="row">
+ <div class="col-4">
+ <div class="card">
+ <h3>카드 1</h3>
+ <p>첫 번째 카드 내용입니다.</p>
+ </div>
+ </div>
+ <div class="col-4">
+ <div class="card">
+ <h3>카드 2</h3>
+ <p>두 번째 카드 내용입니다.</p>
+ </div>
+ </div>
+ <div class="col-4">
+ <div class="card">
+ <h3>카드 3</h3>
+ <p>세 번째 카드 내용입니다.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+<div class="container">
+ <!-- 메인 콘텐츠 + 사이드바 레이아웃 -->
+ <div class="row">
+ <div class="col-8">
+ <div class="card">
+ <h2>메인 콘텐츠 영역</h2>
+ <p>주요 내용이 들어가는 넓은 영역입니다.</p>
+ </div>
+ </div>
+ <div class="col-4">
+ <div class="card">
+ <h3>사이드바</h3>
+ <p>부가 정보나 광고가 들어갑니다.</p>
+ </div>
+ </div>
+ </div>
+
+ <!-- 3등분 레이아웃 -->
+ <div class="row">
+ <div class="col-4">
+ <div class="card">
+ <h3>서비스 1</h3>
+ <p>첫 번째 서비스 소개</p>
+ </div>
+ </div>
+ <div class="col-4">
+ <div class="card">
+ <h3>서비스 2</h3>
+ <p>두 번째 서비스 소개</p>
+ </div>
+ </div>
+ <div class="col-4">
+ <div class="card">
+ <h3>서비스 3</h3>
+ <p>세 번째 서비스 소개</p>
+ </div>
+ </div>
+ </div>
+</div>
+
+</body>
+</html>

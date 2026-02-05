@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>중단점 전략 실습</title>
+ <style>
+ * {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ }
+
+ .debug-info {
+ position: fixed;
+ top: 10px;
+ right: 10px;
+ background: #333;
+ color: white;
+ padding: 10px;
+ border-radius: 5px;
+ font-size: 12px;
+ }
+
+ .container {
+ width: 100%;
+ padding: 0 20px;
+ background: #f0f8ff;
+ min-height: 100vh;
+ }
+
+ .content {
+ background: white;
+ padding: 20px;
+ margin: 20px 0;
+ border-radius: 8px;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+ }
+
+ .grid {
+ display: grid;
+ gap: 20px;
+ grid-template-columns: 1fr;
+ }
+
+ /* 576px 이상: 큰 스마트폰 */
+ @media (min-width: 576px) {
+ .container {
+ max-width: 540px;
+ margin: 0 auto;
+ }
+ .debug-info::after {
+ content: " | SM (≥576px)";
+ }
+ }
+
+ /* 768px 이상: 태블릿 */
+ @media (min-width: 768px) {
+ .container {
+ max-width: 720px;
+ }
+ .grid {
+ grid-template-columns: 1fr 1fr;
+ }
+ .debug-info::after {
+ content: " | MD (≥768px)";
+ }
+ }
+
+ /* 992px 이상: 작은 데스크톱 */
+ @media (min-width: 992px) {
+ .container {
+ max-width: 960px;
+ }
+ .grid {
+ grid-template-columns: repeat(3, 1fr);
+ }
+ .debug-info::after {
+ content: " | LG (≥992px)";
+ }
+ }
+
+ /* 1200px 이상: 큰 데스크톱 */
+ @media (min-width: 1200px) {
+ .container {
+ max-width: 1140px;
+ }
+ .grid {
+ grid-template-columns: repeat(4, 1fr);
+ }
+ .debug-info::after {
+ content: " | XL (≥1200px)";
+ }
+ }
+   /* 모바일 최적화 */
+@media (max-width: 575px) {
+ .btn {
+ min-height: 44px; /* 터치하기 쉬운 크기 */
+ font-size: 16px; /* iOS 줌 방지 */
+ }
+
+ .nav-menu {
+ display: none; /* 햄버거 메뉴로 대체 */
+ }
+
+ .hamburger {
+ display: block;
+ }
+}
+
+/* 태블릿 최적화 */
+@media (min-width: 768px) and (max-width: 991px) {
+ .content {
+ padding: 30px; /* 더 넓은 여백 */
+ }
+
+ /* 가로/세로 모드 대응 */
+ @media (orientation: landscape) {
+ .sidebar {
+ display: block;
+ }
+ }
+}
+
+/* 데스크톱 최적화 */
+@media (min-width: 992px) {
+ .btn:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+ }
+
+ .tooltip {
+ display: block; /* 마우스 호버 툴팁 */
+ }
+}
+/* 컨텐츠 기반 중단점 */
+.article-text {
+ max-width: 100%;
+}
+
+/* 텍스트 가독성을 위한 중단점 */
+@media (min-width: 600px) {
+ .article-text {
+ max-width: 600px; /* 한 줄당 적정 글자 수 유지 */
+ margin: 0 auto;
+ }
+}
+
+/* 네비게이션 변화 중단점 */
+@media (min-width: 850px) {
+ .nav-horizontal {
+ display: flex; /* 수평 네비게이션으로 변경 */
+ }
+
+ .nav-mobile {
+ display: none;
+ }
+}
+
+ </style>
+</head>
+<body>
+ <div class="debug-info">
+ 현재 화면 크기: <span id="screenSize"></span>px
+ </div>
+
+ <div class="container">
+ <div class="content">
+ <h1>반응형 중단점 테스트</h1>
+ <p>브라우저 창의 크기를 조절해보세요!</p>
+ </div>
+
+ <div class="grid">
+ <div class="content">카드 1</div>
+ <div class="content">카드 2</div>
+ <div class="content">카드 3</div>
+ <div class="content">카드 4</div>
+ <div class="content">카드 5</div>
+ <div class="content">카드 6</div>
+ </div>
+ </div>
+
+ <script>
+ function updateScreenSize() {
+ document.getElementById('screenSize').textContent = window.innerWidth;
+ }
+
+ window.addEventListener('resize', updateScreenSize);
+ updateScreenSize();
+ </script>
+</body>
+</html>
